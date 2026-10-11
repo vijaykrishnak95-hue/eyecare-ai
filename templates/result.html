@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prediction Result | EyeCare AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f5fa;
+            color: #193454;
+        }
+
+        header {
+            background: #153d68;
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .result-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #153d68;
+        }
+
+        .disease {
+            font-size: 28px;
+            font-weight: bold;
+            color: #087f8c;
+            margin: 20px 0;
+        }
+
+        .confidence {
+            font-size: 22px;
+            margin: 20px 0;
+        }
+
+        .notice {
+            margin-top: 30px;
+            padding: 18px;
+            background: #fff3dc;
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 25px;
+            background: #087f8c;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .button:hover {
+            background: #066570;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>EyeCare AI</h1>
+    <p>Explainable AI-Based Eye Disease Screening</p>
+</header>
+
+<div class="container">
+    <div class="result-card">
+
+        <h2>AI Prediction Result</h2>
+
+        <p><strong>Uploaded File:</strong> {{ filename }}</p>
+
+        <p>Predicted Eye Disease</p>
+
+        <div class="disease">
+            {{ disease }}
+        </div>
+
+        <div class="confidence">
+            Confidence: <strong>{{ confidence }}%</strong>
+        </div>
+
+        <div class="probabilities-section">
+            <h2>Class Probabilities</h2>
+            <p>Probability scores for each class predicted by the model:</p>
+
+            {% for class_name, probability in probabilities.items() %}
+            <div style="margin: 15px 0; text-align: left;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>{{ class_name.replace('_', ' ').title() }}</span>
+                    <strong>{{ probability }}%</strong>
+                </div>
+                    <div style="background: #e5e7eb; border-radius: 8px; height: 12px; overflow: hidden;">
+                    <div style="background: #0d8995; width: {{ probability }}%; height: 12px; border-radius: 8px;"></div>
+                </div>
+            </div>
+             {% endfor %}
+        </div>
+
+        <div class="interpretation-section" style="margin: 25px 0; padding: 20px; background: #eef7f8; border-radius: 12px; text-align: left;">
+         <h2>Interpretation of Results</h2>
+         <p><strong>Highest model score:</strong> {{ disease }}</p>
+         <p>The model assigned its highest probability score to {{ disease }} for this uploaded image.</p>
+         <p><strong>Important:</strong> This is an AI-generated prediction for educational and research purposes only. It does not confirm a medical condition. Please consult a qualified eye-care professional for diagnosis.</p>
+        </div>
+
+        
+        <div class="explanation-section">
+                <h2>Explainable AI - Grad-CAM</h2>
+                <h2>Original Uploaded Image</h2>
+                <img src="{{ url_for('serve_uploaded_image', filename=filename) }}"
+                alt="Original uploaded eye image"
+                style="max-width: 100%; width: 400px; border-radius: 10px;">
+                <p>Original image submitted to the AI model for classification.</p>
+
+
+                <p>The heatmap highlights image regions that influenced the model's prediction.</p>
+
+                 <h3>Grad-CAM Heatmap</h3>
+                 <img src="{{ url_for('serve_result_image', filename=gradcam_heatmap.split('/')[-1].split('\\')[-1]) }}"
+                      alt="Grad-CAM heatmap"
+                      style="max-width: 100%; width: 400px; border-radius: 10px;">
+                 <h3>Grad-CAM Overlay</h3>
+                 <img src="{{ url_for('serve_result_image', filename=gradcam_overlay.split('/')[-1].split('\\')[-1]) }}"
+                      alt="Grad-CAM overlay on the retinal image"
+                      style="max-width: 100%; width: 400px; border-radius: 10px;">
+
+
+         <p><small>Note: Grad-CAM shows regions influencing the model; it does not confirm disease or abnormalities.</small></p>
+        </div>
+
+        <p>
+            This result was generated using our trained
+            EfficientNet-B0 deep learning model.
+        </p>
+
+        <div class="notice">
+            <strong>Important Medical Notice</strong>
+            <p>
+                This application is an academic research prototype,
+                not a medical diagnostic tool.
+                AI predictions may be incorrect.
+                Please consult a qualified ophthalmologist
+                for professional medical advice.
+            </p>
+        </div>
+
+        <a href="/" class="button">Back to Home</a>
+
+    </div>
+</div>
+
+</body>
+</html>

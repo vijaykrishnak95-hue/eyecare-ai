@@ -1,0 +1,14 @@
+Flask
+Flask-SQLAlchemy
+torch
+torchvision
+Pillow
+opencv-python-headless
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+grad-cam
+openpyxl
+gunicorn

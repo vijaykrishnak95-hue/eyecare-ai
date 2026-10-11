@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History | EyeCare AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f5fa;
+            color: #183153;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header {
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #087f8c;
+        }
+
+        .summary {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+        }
+
+        .number {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .table-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            overflow-x: auto;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 15px 12px;
+            border-bottom: 1px solid #e7edf3;
+        }
+
+        th {
+            background: #eaf6f7;
+            color: #14566b;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 35px;
+            color: #68778a;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 11px 18px;
+            background: #087f8c;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            margin-top: 12px;
+        }
+
+        .button:hover {
+            background: #066570;
+        }
+
+        .confidence {
+            font-weight: bold;
+            color: #087f8c;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .header, .table-card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>Prediction History</h1>
+            <p>View previous eye image predictions recorded by EyeCare AI.</p>
+            <a class="button" href="/">Back to Home</a>
+        </div>
+
+        <div class="summary">
+            <div class="card">
+                <div>Total Predictions</div>
+                <div class="number">{{ records|length }}</div>
+            </div>
+
+            <div class="card">
+                <div>Database</div>
+                <div class="number" style="font-size: 20px;">
+                    SQLite
+                </div>
+                <p>eye_disease.db</p>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <h2>Stored Records</h2>
+
+            {% if records %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image Filename</th>
+                        <th>Uploaded Image</th>
+                        <th>Predicted Disease</th>
+                        <th>Confidence</th>
+                        <th>Date &amp; Time</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for record in records %}
+                    <tr>
+                        <td>{{ record.id }}</td>
+                        <td>{{ record.filename }}</td>
+                        <td>
+                            <img
+                                 src="{{ url_for('serve_uploaded_image', filename=record.filename) }}"
+                                 alt="Uploaded eye image"
+                                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"
+                            >
+                        </td>
+
+                        <td>{{ record.disease.replace('_', ' ').title() }}</td>
+                        <td class="confidence">
+                            {{ "%.2f"|format(record.confidence) }}%
+                        </td>
+                        <td>
+                            {{ record.uploaded_at.strftime('%d-%m-%Y %H:%M') }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty">
+                <h3>No predictions stored yet</h3>
+                <p>Upload an eye image to create your first record.</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+</html>

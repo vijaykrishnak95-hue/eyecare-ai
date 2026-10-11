@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Disease Information | EyeCare AI</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f6fb;
+            color: #183153;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #123c69;
+            color: white;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 16px;
+        }
+
+        .hero {
+            padding: 55px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #e1f2ff, white);
+        }
+
+        .hero h1 { font-size: 34px; }
+
+        .hero p {
+            max-width: 760px;
+            margin: auto;
+            color: #526579;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .disease-card {
+            background: white;
+            margin-bottom: 22px;
+            padding: 26px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px #18315310;
+        }
+
+        .disease-card h2 {
+            color: #087e8b;
+            margin-top: 0;
+        }
+
+        .disease-card h3 {
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .notice {
+            background: #fff3d6;
+            color: #624b12;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .back {
+            display: inline-block;
+            background: #087e8b;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            background: #123c69;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 27px; }
+            header a { margin-left: 0; margin-right: 12px; }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h2>EyeCare AI</h2>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/history">My History</a>
+        <a href="/admin">Admin</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Eye Disease Information</h1>
+    <p>
+        Learn about common eye conditions, associated risk factors,
+        and general steps that support eye health.
+    </p>
+</section>
+
+<main>
+    <article class="disease-card">
+        <h2>Cataract</h2>
+        <p>
+            A cataract is clouding of the eye's natural lens. It can cause
+            blurry vision, glare, faded colours, and difficulty seeing at night.
+        </p>
+        <h3>Causes and risk factors</h3>
+        <p>
+            Ageing is a major cause. Other risk factors include diabetes,
+            smoking, eye injuries, prolonged corticosteroid use, and excessive
+            ultraviolet exposure.
+        </p>
+        <h3>General guidance</h3>
+        <p>
+            Arrange an eye examination if vision changes. Sunglasses that block
+            UV rays, not smoking, and managing existing health conditions can
+            support eye health. Treatment decisions belong to an eye-care professional.
+        </p>
+    </article>
+
+    <article class="disease-card">
+        <h2>Diabetic Retinopathy</h2>
+        <p>
+            This condition affects retinal blood vessels and is associated
+            with diabetes. It may progress without obvious early symptoms.
+        </p>
+        <h3>Causes and risk factors</h3>
+        <p>
+            Diabetes-related damage to retinal blood vessels is the underlying
+            cause. Risk increases with longer duration of diabetes and can be
+            influenced by blood glucose, blood pressure, and cholesterol control.
+        </p>
+        <h3>General guidance</h3>
+        <p>
+            People with diabetes should follow their clinician's recommended
+            schedule for comprehensive dilated eye examinations and manage
+            blood glucose, blood pressure, and cholesterol with their care team.
+        </p>
+    </article>
+
+    <article class="disease-card">
+        <h2>Glaucoma</h2>
+        <p>
+            Glaucoma refers to a group of eye conditions that damage the optic
+            nerve. Some forms develop gradually and may cause no early symptoms.
+        </p>
+        <h3>Causes and risk factors</h3>
+        <p>
+            Risk factors include elevated eye pressure, increasing age,
+            family history, and certain medical or eye conditions.
+            Glaucoma can also occur when eye pressure is not elevated.
+        </p>
+        <h3>General guidance</h3>
+        <p>
+            Regular comprehensive eye examinations can help detect glaucoma.
+            An eye-care professional can assess individual risk and recommend
+            monitoring or treatment when needed. Sudden severe eye pain,
+            a red eye, blurred vision, or nausea requires emergency assessment.
+        </p>
+    </article>
+
+    <article class="disease-card">
+        <h2>Normal Category</h2>
+        <p>
+            "Normal" is a label used by this project's dataset for images
+            assigned to its normal class. It does not prove that an eye is healthy.
+        </p>
+        <h3>General guidance</h3>
+        <p>
+            Continue routine eye examinations based on your age, health,
+            and clinician's advice. Seek professional assessment for new,
+            persistent, or concerning vision changes.
+        </p>
+    </article>
+
+    <div class="notice">
+        <strong>Important:</strong> This page provides general educational
+        information, not personal medical advice. EyeCare AI is an academic
+        research prototype. Its predictions and Grad-CAM heatmaps can be wrong
+        and must not be used alone to diagnose or rule out disease. A model
+        prediction cannot determine the cause of an individual's eye condition.
+        Consult a qualified eye-care professional for assessment.
+    </div>
+
+    <a class="back" href="/">Back to Home</a>
+</main>
+
+<footer>
+    EyeCare AI · Educational information · Research prototype
+</footer>
+</body>
+</html>

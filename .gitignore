@@ -1,0 +1,18 @@
+# Python environment and cache
+.venv/
+__pycache__/
+*.py[cod]
+
+# Private database and exported user records
+eye_disease.db
+admin_export.xlsx
+
+# Uploaded images and generated results
+uploads/
+results/
+
+# Dataset
+dataset/
+
+# Local environment variables and secrets
+.env
