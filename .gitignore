@@ -16,3 +16,6 @@ dataset/
 
 # Local environment variables and secrets
 .env
+
+*.log
+instance/
